@@ -12,4 +12,7 @@ public interface MemberRepository {
     Optional<Member> findByName(String name);
     // 회원정보를 모두 찾기
     List<Member> findAll();
+    void saveLockerNumber(String name, Integer number);
+
+    void update(Long memberId, Member updateParam);
 }

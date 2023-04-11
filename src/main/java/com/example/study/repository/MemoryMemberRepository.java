@@ -1,8 +1,11 @@
 package com.example.study.repository;
 
 import com.example.study.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
+
+@Repository
 
 public class MemoryMemberRepository implements MemberRepository{
 
@@ -30,6 +33,21 @@ public class MemoryMemberRepository implements MemberRepository{
     @Override
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
+    }
+
+    @Override
+    public void saveLockerNumber(String name, Integer number) {
+        findByName(name).get().setLockerNumber(number);
+    }
+
+    @Override
+    public void update(Long memberId, Member updateParam) {
+        Member member = findById(memberId).get();
+        member.setName(updateParam.getName());
+        member.setSignUpDate(updateParam.getSignUpDate());
+        member.setLockerNumber(updateParam.getLockerNumber());
+        member.setGrade(updateParam.getGrade());
+
     }
 
     public void clearStore(){

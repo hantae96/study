@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="py-5 text-center">
+        <h2>고객 상세 정보</h2>
+    </div>
+
+    <!-- 추가 -->
+    <h2 th:if="${param.status}" th:text="'저장 완료'"></h2>
+
+    <div>
+        <label for="id">고객 ID</label>
+        <input type="text" id="id" name="id" class="form-control" value="1" th:value="${member.id}" readonly>
+    </div>
+    <div>
+        <label for="name">고객 이름</label>
+        <input type="text" id="name" name="name" class="form-control" value="홍길동" th:value="${member.Name}" readonly>
+    </div>
+    <div>
+        <label for="signUpDate">가입 일자</label>
+        <input type="text" id="signUpDate" name="signUpDate" class="form-control" value="20220220" th:value="${member.signUpDate}" readonly>
+    </div>
+    <div>
+        <label for="lockerNumber">사물함 번호</label>
+        <input type="number" id="lockerNumber" name="lockerNumber" class="form-control" value="10" th:value="${member.lockerNumber}" readonly>
+    </div>
+    <div>
+        <label for ="grade">등급</label>
+        <input type = "text" id ="grade" name = "grade" class = "form-control" value="newbee" th:value = "${member.grade}" readonly>
+    </div>
+    <hr class="my-5">
+
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-lg"
+                    onclick="location.href='editForm.html'"
+                    th:onclick = "|location.href='@{/basic/members/{memberId}/edit(memberId=${member.id})}'|"
+                    type="button">고객 정보 수정</button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='items.html'"
+                    th:onclick="|location.href='@{/basic/members}'|"
+                    type="button">목록으로</button>
+        </div>
+    </div>
+
+</div> <!-- /container -->
+</body>
+</html>
