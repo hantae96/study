@@ -3,9 +3,21 @@ package com.example.study.service;
 import com.example.study.domain.Member;
 import com.example.study.repository.MemberRepository;
 import com.example.study.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
+@Service
 public class MemberService {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    @Autowired
+    public MemberService(MemberRepository memberRepository){
+        this.memberRepository = memberRepository;
+    }
+
 
     public Long join(Member member){
         // if 문을 쓰지않고, 안에서 에러를 발생한다.
@@ -22,5 +34,15 @@ public class MemberService {
         );
     }
 
+    public List<Member> findMembers(){
+        return memberRepository.findAll();
+    }
 
+    public Optional<Member> findOne(Long memberId){
+        return memberRepository.findById(memberId);
+    }
+
+    public void registLockerNumber(String name, Integer number){
+        memberRepository.saveLockerNumber(name,number);
+    }
 }
